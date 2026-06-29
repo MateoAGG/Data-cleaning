@@ -5,13 +5,6 @@
 *==============================================================================*
 ** Fuente: Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU)
 *==============================================================================*
-** Elaboración:
-
-Carolina Sánchez
-Alejandra Aguirre 
-Alexis Guayasamín 
-Camila Rodríguez
-Carlos González
 *==============================================================================*
 ******************* INDICADORES MERCADO LABORAL Y SEGURIDAD  *******************
 *=============================================================================*/
