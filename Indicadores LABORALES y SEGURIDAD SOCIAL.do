@@ -1,8 +1,3 @@
-/*=============================================================================*
-				PONTIFICIA UNIVERSIDAD CATÓLICA DEL ECUADOR 
-							FACULTAD DE ECONOMÍA
-					INSTITUTO DE INVESTIGACIONES ECONÓMICAS 
-*==============================================================================*
 ** Fuente: Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU)
 *==============================================================================*
 *==============================================================================*
@@ -63,42 +58,25 @@ order    bdd_fecha
 *==============================================================================*
 		gen pet = (p03 >= 15) if  !missing(condact)
   label var pet "`a' Poblacion en Edad de Trabajar"
-  
-		tabout p02 pet [aw=fexp] using laboral_anual.xls, cells(col) dpcomma f(2)
-	    tabout etnia pet [aw=fexp] using laboral_anual.xls, append cells(col) dpcomma f(2)
-		tabout area pet [aw=fexp] using laboral_anual.xls, append cells(col) dpcomma f(2) 
-		tabout edad pet [aw=fexp] using laboral_anual.xls, append cells(col) dpcomma f(2) 
 
 *==============================================================================*
 ** 01. POBLACIÓN ECONOMICAMENTE ACTIVA **
 *==============================================================================*	
 		gen pea = (condact>=1 & condact <= 8) if  !missing(condact)
   label var pea "`a' Poblacion Economicamente Activa"
- 
-	    tabout p02  pea [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia pea [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2) 
-		tabout area  pea [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2) 
-		tabout edad  pea [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2) 
+
 *==============================================================================*
 ** 02. POBLACIÓN ECONÓMICAMENTE INACTIVA **
 *==============================================================================*
 		gen pei = (condact == 9) if  !missing(condact)
   label var pei "`a' Poblacion Economicamente Inactiva"
-    
-	    tabout p02 pei [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia pei [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area pei [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad pei [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
+
 *==============================================================================*
 ** 04. TASA DE PARTICIPACIoN GLOBAL **
 *==============================================================================*
 		gen tpg = pea/pet
   label var tpg "`a' Tasa de Participacion Global"
-  
- 	    tabout p02 tpg [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia tpg [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area tpg [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad tpg [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
+
 *==============================================================================*
 ** 05. POBLACIÓN CON EMPLEO **
 *==============================================================================*
@@ -107,12 +85,7 @@ order    bdd_fecha
 	replace emp = 1 if pea == 1 & p20 == 2 & p21 <= 11
 	replace emp = 1 if pea == 1 & p20 == 2 & p21 == 12 & p22 == 1
   label var emp "`a' Poblacion con empleo"
-    
- 	    tabout p02 emp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia emp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area emp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad emp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-*==============================================================================*
+
 ** 06. TASA DE EMPLEO ADECUADO **
 *==============================================================================*
 	** Numerador **
@@ -120,11 +93,6 @@ order    bdd_fecha
 	**Denominador**
 	replace t_adec=0 if (condact==2 | condact==3 |condact==4| condact==5 | condact==6 | condact==7 | condact==8)
   label var t_adec "`a' Empleo Adecuado"
-    
- 	    tabout p02 t_adec [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia t_adec [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area t_adec [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad t_adec [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
 
 *==============================================================================*
 ** 07. TASA DE EMPLEO INADECUADO **
@@ -135,11 +103,7 @@ order    bdd_fecha
 	**Denominador**
     replace inadec = 0 if (condact==1 | condact==6 | condact==7 | condact==8)
   label var inadec "`a' Empleo Inadecuado"
-  
- 	    tabout p02 inadec [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia inadec [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area inadec [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad inadec [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
+
 *==============================================================================*
 ** 08. SUBEMPLEO **
 *==============================================================================*
@@ -147,12 +111,7 @@ order    bdd_fecha
 	**Denominador**
     replace subemp = 0 if (condact==1 | condact==7 | condact==8 | condact==4 | condact==5 |condact==6 )
   label var subemp "`a' Subempleo"
-  
- 	    tabout p02 subemp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia subemp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area subemp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad subemp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		
+
 *==============================================================================*
 ** 09. DESEMPLEO **
 *==============================================================================*
@@ -169,12 +128,7 @@ order    bdd_fecha
 	    * Desempleo
 	   egen desemp = rowtotal(des_ab des_oc), missing
   label var desemp "`a' Poblacion sin Empleo"
-   
- 	    tabout p02 desemp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia desemp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area desemp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad desemp [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		
+
 *==============================================================================*
 ** 10. TRABAJO NO REMUNERADO **
 *==============================================================================*
@@ -182,11 +136,6 @@ order    bdd_fecha
 	replace tnr = 1 if inrange(p42,7,9)
 	replace tnr = 1 if inrange(p54,7,9)
   label var tnr "`a' Trabajo No Remunerado"
-   
- 	    tabout p02 tnr [aw=fexp] using laboral_anual.xls, append cells(col) dpcomma f(2)
-	    tabout etnia tnr [aw=fexp] using laboral_anual.xls, append cells(col) dpcomma f(2)
-		tabout area tnr [aw=fexp] using laboral_anual.xls, append cells(col) dpcomma f(2)
-		tabout edad tnr [aw=fexp] using laboral_anual.xls, append cells(col) dpcomma f(2)
 
 *==============================================================================*
 ** 11. EMPLEO EN EL SECTOR FORMAL **
@@ -200,12 +149,6 @@ order    bdd_fecha
     replace formal = 1 if ocu_f == 1 & condact > 0 & condact < 7
   label var formal "`a' Tasa de ocupacion en el sector formal"
 
- 
- 	    tabout p02 formal [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia formal [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area formal [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad formal [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-
 *==============================================================================*
 ** 12. EMPLEO EN EL SECTOR INFORMAL **
 *==============================================================================*
@@ -217,12 +160,7 @@ order    bdd_fecha
 		**Denominador**
     replace informal=1 if ocu_inf == 1 & condact > 0 & condact < 7
   label var informal "`a' Tasa de ocupacion en el sector informal"
-  
- 	    tabout p02 informal [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia informal [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area informal [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad informal [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		
+
 *==============================================================================*
 ** 13. EMPLEO EN EL SECTOR INFORMAL AGRÍrowA **
 *==============================================================================*
@@ -234,12 +172,7 @@ order    bdd_fecha
 		**Denominador**
 		replace informala=1 if ocu_infa==1 & condact>0 & condact<7
       label var informala "`a' Empleo Informal Agrícola"
-  
- 	    tabout p02 informala [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia informala [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area informala [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad informala [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		
+
 *==============================================================================*
 ** 14. EMPLEO EN EL SECTOR INFORMAL NO AGRÍrowA **
 *==============================================================================*
@@ -251,11 +184,7 @@ order    bdd_fecha
 		**Denominador**
     replace informalna=1 if ocu_infna==1 & condact>0 & condact<7 & p03 >= 15
   label var informalna "`a' Empleo Informal NO Agrícola"
-  
- 	    tabout p02 informalna [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia informalna [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area informalna [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad informalna [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
+
 *==============================================================================*
 ** 15. TASA DE EMPLEO DOMÉSTICO **
 *==============================================================================*
@@ -267,20 +196,11 @@ order    bdd_fecha
 		**Denominador**
 	replace domest = 1 if ocu_dom == 1 & condact > 0 & condact<7 & p03 >= 15
   label var domest "`a' Empleo Doméstico"
-  
- 	    tabout p02 domest [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia domest [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area domest [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad domest [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		
+
 *==============================================================================*
 ** 16. POR RAMA DE ACTIVIDAD **
 *==============================================================================*      
-		tabout p02 rama [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia rama [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area rama [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad rama [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		
+
 *==============================================================================*
 ** 18. DESEMPLEO JUVENIL **
 *==============================================================================*
@@ -288,12 +208,7 @@ order    bdd_fecha
 		**Denominador**
 	replace desemp_juv = 0 if (condact==1 | condact==2 | condact==3 | condact==4 | condact==5 |condact==6 ) & (p03>=18 & p03<=29)
   label var desemp_juv "`a' Tasa de Desempleo Juvenil" 
-  
- 	    tabout p02 desemp_juv [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia desemp_juv [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area desemp_juv [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad desemp_juv [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		
+
 *==============================================================================*
 ** 21. SEGURIDAD SOCIAL **
 *==============================================================================*  
@@ -303,22 +218,12 @@ replace segsoc = 1 if p05b == 1 | p05b == 2 | p05b == 3 | p05b == 4
 recode segsoc . = 2
 lab def l_segsoc 1"Si" 2"No"
 lab val segsoc l_segsoc
-		
-		tabout p02 segsoc [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-	    tabout etnia segsoc [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout area segsoc [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
-		tabout edad segsoc [aw=fexp] using laboral_anual.xls, append cells(row) dpcomma f(2)
 
 *==============================================================================*
 ** 19. INGRESO LABORAL PROMEDIO **
 *==============================================================================*
 	replace ingrl = . if (ingrl == 0 | ingrl == 999999)
 
-tabout p02   [aw=fexp] using laboral_anual.xls, append c(mean p24) dpcomma f(2) sum
-tabout etnia [aw=fexp] using laboral_anual.xls, append c(mean p24) dpcomma f(2) sum
-tabout area  [aw=fexp] using laboral_anual.xls, append c(mean p24) dpcomma f(2) sum
-tabout edad  [aw=fexp] using laboral_anual.xls, append c(mean p24) dpcomma f(2) sum
-   
 *==============================================================================*
 ** 20. HORAS PROMEDIO DE TRABAJO SEMANAL **
 *==============================================================================*
