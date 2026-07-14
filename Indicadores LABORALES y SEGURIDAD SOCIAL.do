@@ -3,21 +3,6 @@
 
 
 clear all
-
-use "merged_21.sav"
-*==============================================================================*
-
-cd "C:\Users\aiguayasamin\Documents\merged_anual"
-global  enemdu_anual "18 19 21 22"
-foreach  a of global enemdu_anual {
-
-		  
-use "merged_20`a'.dta",clear
-	  
-cap drop bdd_fecha 
-gen      bdd_fecha = "20`a'"
-lab var  bdd_fecha   "20`a'"
-order    bdd_fecha
 	
 *==============================================================================*
 *********** CONSTRUCCIÓN DE VARIABLES Y LIMPIEZA BASE DE DATOS *****************
@@ -234,14 +219,6 @@ tabout edad  [aw=fexp] using laboral_anual.xls, append c(mean ingrl) dpcomma f(2
 			}
 *
 *==============================================================================*
-
-
-
-
-cd "C:\Users\aiguayasamin\Documents\INEC\ENEMDU\BD_12_SPSS"
-use "200912_merged.dta", clear
-
-import spss using "enemdu_persona_2022_12.sav", clear
 
 
 cd "C:\Users\Mateo\Desktop\Code\Stata\Enemdu"
