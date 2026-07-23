@@ -51,13 +51,13 @@ dt_18 <- read_dta("base_unida_2018_anual.dta")
 
 
 
-# 4) Check the variables and labels for the data ------------------------------------------
+# 4) Variables y metadata ------------------------------------------
 
 get_label(dt_24) # Sirve para ver el Nombre de las Variables
 get_labels(dt_24) # Sirve para las etiquetas de CADA variable
 get_labels(dt_24$pobreza) # Sirve para ver las etiquetas de cada variable individual
 
-# 5) Generate new General variables  -------------------------------------------------
+# 5) Selección de variables -------------------------------------------------
 
 indicadores <- c("p02", 
                  "area", 
@@ -170,7 +170,7 @@ dt_24$edad2 <- factor(dt_24$edad2,
 dt_24$edad2 <- set_label(dt_24$edad2, "Grupos de edad2")
 
 
-# 6) Labor Market ----------------------------------------------------------
+# 6) Mercado laboral ----------------------------------------------------------
 
 dt_24 <- dt_24 %>%
   mutate(
@@ -351,7 +351,7 @@ dt_24$segsoc <- set_label(dt_24$segsoc,
 
 
 
-# 7) Education ---------------------------------------------------------------
+# 7) Educación ---------------------------------------------------------------
 
 ### Analfabetismo
 
@@ -483,7 +483,7 @@ dt_24$nini <- add_labels(dt_24$nini,
                          labels = c("No NiNi" = 0, "NiNi" = 1))
 dt_24$nini <- set_label(dt_24$nini, "Jóvenes que no estudian ni trabajan")
 
-# 9) Housing -----------------------------------------------------------------
+# 9) Vivienda -----------------------------------------------------------------
 
 
 # 0) Precalculamos hsize de forma limpia y numérica
@@ -634,7 +634,7 @@ dt_24$tipo <- set_label(dt_24$tipo,
 dt_24$via_acc <- set_label(dt_24$via_acc,
                             "Vias de acceso")
 
-# 8) Poverty -----------------------------------------------------------------
+# 8) Pobreza -----------------------------------------------------------------
 
 # DIMENSION 1: EDUCACIÓN
 
@@ -862,7 +862,7 @@ dt_24 <- dt_24 %>%
     IPM  = if_else(TPM == 1, ci, 0)
   )
 
-# 10) Sampling design ---------------------------------------------------------
+# 10) Diseño Muestral ---------------------------------------------------------
 
 design <- svydesign(ids = ~upm,
                     strata = ~estrato,
@@ -967,7 +967,7 @@ horas_sexo <- svyby(~TPM, ~p02, design, svymean, na.rm = TRUE, vartype = "cv")
 horas_sexo
 ###
 
-# 13) Write in excel ----------------------------------------------------------
+# 13) Write in excel (En producción)) ----------------------------------------------------------
 
 library(openxlsx)
 
